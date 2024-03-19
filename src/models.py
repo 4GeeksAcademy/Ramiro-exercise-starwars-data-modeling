@@ -63,7 +63,7 @@ class Usuarios(Base):
     contraseña=Column(String(50))
     email= Column(String(50))
     edad=Column(Integer)
-    DNI =Column(Integer)
+    DNI =Column(Integer, nullable=False)
 
     def to_dict(self):
         return {}
@@ -76,7 +76,7 @@ class Favoritos(Base):
     personas_id = Column(Integer, ForeignKey('personas.id'))
     planetas_id = Column(Integer, ForeignKey('planetas.id'))
     vehiculos_id = Column(Integer, ForeignKey('vehiculos.id'))
-    usuarios_DNI = Column(String(15), ForeignKey('usuarios.DNI'))
+    usuarios_DNI = Column(String(15), ForeignKey('usuarios.DNI'), nullable=False )
 
     def to_dict(self):
         return {}
