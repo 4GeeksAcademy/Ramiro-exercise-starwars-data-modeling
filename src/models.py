@@ -20,6 +20,7 @@ class Personas(Base):
     eye_color= Column(String(250))
     gender= Column(String(250))
     birth_year= Column(String(50))
+    personas_one_to_many = relationship('Favoritos', backref='personas', lazy=True)
 
 class Planetas(Base):
     __tablename__ = 'planetas'
@@ -32,6 +33,7 @@ class Planetas(Base):
     climate = Column(String(250))
     population = Column(Integer)
     terrain = Column(String(250))
+    planetas_one_to_many = relationship('Favoritos', backref='planetas', lazy=True)
 
     def to_dict(self):
         return {}
@@ -47,6 +49,7 @@ class Vehiculos(Base):
     passangres=Column(Integer)
     length=Column(Integer)
     consumables=Column(String(100))
+    vehiculos_one_to_many = relationship('Favoritos', backref='vehiculos', lazy=True)
 
     def to_dict(self):
         return {}
@@ -64,6 +67,7 @@ class Usuarios(Base):
     email= Column(String(50))
     edad=Column(Integer)
     DNI =Column(Integer, nullable=False)
+    user_one_to_many = relationship('Favoritos', backref='usuarios', lazy=True)
 
     def to_dict(self):
         return {}
@@ -76,7 +80,7 @@ class Favoritos(Base):
     personas_id = Column(Integer, ForeignKey('personas.id'))
     planetas_id = Column(Integer, ForeignKey('planetas.id'))
     vehiculos_id = Column(Integer, ForeignKey('vehiculos.id'))
-    usuarios_DNI = Column(String(15), ForeignKey('usuarios.DNI'), nullable=False )
+    usuarios_DNI = Column(String(15), ForeignKey('usuarios.id'), nullable=False )
 
     def to_dict(self):
         return {}
